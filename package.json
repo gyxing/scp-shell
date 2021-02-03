@@ -1,6 +1,6 @@
 {
   "name": "scp-shell",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "基于scp2的前端自动化部署方案",
   "bin": "bin/index",
   "author": "gyxing",

@@ -50,4 +50,16 @@ scp-shell deploy --env.test
 
 # 部署至 线上环境
 scp-shell deploy --env.prod
+
+```
+其他命令
+```shell
+# 部署前，对前一次的部署文件进行备份
+scp-shell deploy --env.test --backup
+
+# 部署前，清空目标文件夹
+scp-shell deploy --env.test --clear
+
+# 对前一次的部署文件进行备份，并清空目标文件夹
+scp-shell deploy --env.test --backup --clear
 ```

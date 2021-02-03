@@ -16,6 +16,8 @@ program
   .option('-d, --env.dev', '开发环境')
   .option('-t, --env.test', '测试环境')
   .option('-p, --env.prod', '线上环境')
+  .option('-b, --backup', '需要备份')
+  .option('-c, --clear', '清空旧文件')
   .parse(process.argv)
   .description('发布上线')
   .action((options) => {
@@ -29,7 +31,7 @@ program
     if (options['env.prod']) {
       env = 'prod'
     }
-    deploy(env)
+    deploy(env, options.backup, options.clear)
   });
 
 program.on('command:*', (operands) => {

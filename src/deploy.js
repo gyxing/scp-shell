@@ -5,7 +5,7 @@ const ora = require('ora');
 const chalk = require('chalk');
 const helper = require('./helper')
 
-module.exports = function (env) {
+module.exports = function (env, needBackup, needClear) {
 
   if (!env) {
     console.log(chalk.red('请选择服务器环境'));
@@ -47,6 +47,16 @@ module.exports = function (env) {
     conn
       .on('ready', function () {
         const cmd = [];
+        if (needBackup) {
+          // 需备份
+          const backupDir = `${serverData.path}__history/${helper.dateFormat()}`;
+          cmd.push(`mkdir -p ${backupDir}`);
+          cmd.push(`mv -f ${serverData.path}/* ${backupDir}`);
+        }
+        if (needClear) {
+          // 需清空目标目录
+          cmd.push(`rm -rf ${serverData.path}/*`)
+        }
         spinner.start();
         conn.exec(cmd.join('\n'), function (err, stream) {
           if (err) throw err;

@@ -23,7 +23,10 @@ module.exports = function () {
     // 添加进 gitignore
     const gitIgnorePath = path.join(root, '.gitignore');
     if (fs.existsSync(gitIgnorePath)) {
-      fs.appendFileSync(gitIgnorePath, '\n# scp-shell配置文件\n.scprc');
+      const gitIgnoreText = fs.readFileSync(gitIgnorePath, 'utf8');
+      if (gitIgnoreText.indexOf('.scprc') === -1) {
+        fs.appendFileSync(gitIgnorePath, '\n# scp-shell配置文件\n.scprc');
+      }
     }
 
     const msg = {
